@@ -1,4 +1,6 @@
 public class Demo {
+
+
     public static void main(String[] args) {
         int N = 100000;
 
@@ -8,6 +10,7 @@ public class Demo {
                 System.out.println(a.v);
             }).start();
         }
+
     }
 
     static class A {

@@ -50,7 +50,10 @@ public class FileSaver implements Runnable {
                 long endMillis = System.currentTimeMillis();
 
                 long downloadTime = endMillis - startMillis;
-                Thread.sleep(downloadTime > 1000 ? downloadTime + downloadTime % 1000: 1000 - downloadTime);
+                if (downloadTime < 1000) {
+                    Thread.sleep(1000 - downloadTime);
+                }
+
             }
 
             System.out.println(String.format("%s is done!", fileName));

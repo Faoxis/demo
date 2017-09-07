@@ -12,7 +12,12 @@ public class CommandLineReaderTest {
     @Before
     public void setUp() {
         commandLineReader =
-                new CommandLineReader(new String[]{"-n", "10", "-s", "2000000"});
+                new CommandLineReader(new String[]{
+                        "-n", "10",
+                        "-l", "2000000",
+                        "-f", "/home/someone/file.txt",
+                        "-o", "output"
+                });
     }
 
     @Test
@@ -36,6 +41,22 @@ public class CommandLineReaderTest {
 
         commandLineReader = new CommandLineReader(new String[]{"-c", "ajgasjgasg"});
         assertEquals(commandLineReader.getBytesPerSecond(), 1000000);
+    }
+
+    @Test
+    public void getPathToFileLinks() {
+        assertEquals(commandLineReader.getPathToFileLinks(), "/home/someone/file.txt");
+
+        commandLineReader = new CommandLineReader(new String[]{"-f", "/dir/file"});
+        assertEquals(commandLineReader.getPathToFileLinks(), "/dir/file");
+    }
+
+    @Test
+    public void getOutputDirPath() {
+        assertEquals(commandLineReader.getOutputDirPath(), "output");
+
+        commandLineReader = new CommandLineReader(new String[]{"-o", "/home/output"});
+        assertEquals(commandLineReader.getOutputDirPath(), "/home/output");
     }
 
 }
